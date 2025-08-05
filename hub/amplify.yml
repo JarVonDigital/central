@@ -13,3 +13,5 @@ applications:
         baseDirectory: dist/hub
         files:
           - '**/*'
+      runtime:
+        nodejs: 20.19
