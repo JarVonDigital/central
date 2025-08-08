@@ -1,0 +1,21 @@
+<p-menubar [model]="items">
+  <ng-template #start>
+    <h2 class="logo">JarVonDigital LLC</h2>
+  </ng-template>
+
+  <ng-template #end>
+    <div class="search">
+      <p-inputgroup>
+        <input pInputText placeholder="Have a question?" type="text">
+        <p-inputgroup-addon>
+          <p-button icon="pi pi-search"></p-button>
+        </p-inputgroup-addon>
+      </p-inputgroup>
+      <p-button
+        rounded
+        icon="pi pi-lock">
+      </p-button>
+    </div>
+
+  </ng-template>
+</p-menubar>

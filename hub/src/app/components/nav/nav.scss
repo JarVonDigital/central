@@ -1,0 +1,41 @@
+:host {
+
+  p-menubar {
+    font-family: "Smooch Sans", sans-serif;
+    background: var(--p-primary-700);
+    color: #3D3D3D;
+    border: none;
+    border-radius: 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+
+    --p-menubar-item-focus-background: var(--p-primary-400);
+    --p-menubar-item-color: rgb(70, 70, 70);
+    --p-menubar-item-focus-color: rgb(70, 70, 70);
+    --p-menubar-item-gap: 1rem;
+    --p-menubar-item-icon-focus-color: rgb(70, 70, 70);
+
+    .logo {
+      font-weight: 400;
+      font-size: 2rem;
+      margin: .5rem 2rem .5rem .5rem;
+    }
+
+    .search {
+      display: flex;
+      gap: 1rem;
+      margin: 0 .5rem;
+
+      --p-inputtext-background: var(--p-primary-300);
+      --p-inputtext-color: rgb(70, 70, 70);
+      --p-inputtext-placeholder-color: rgb(50, 50, 50);
+      --p-inputtext-focus-border-color: rgb(50, 50, 50);
+
+      input {
+        width: 15rem;
+      }
+    }
+  }
+
+
+}
