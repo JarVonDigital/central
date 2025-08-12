@@ -1,1 +1,30 @@
 <app-nav/>
+
+<div class="main-image">
+  <img src="main-photo.jpg" alt="">
+</div>
+
+@let enterAnimation = 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000';
+@let exitAnimation = 'animate-exit fade-out-10 zoom-out-50 animate-duration-1000';
+
+<div class="services">
+  @for (service of services; track service) {
+    <p-card>
+      <div class="content">
+        <div class="details">
+          <div class="inner">
+            <h3>{{ service.mission }}</h3>
+            <p>{{ service.statement }}</p>
+          </div>
+          <div class="detail-bg-image"></div>
+        </div>
+        <div class="bg-image">
+          <img [src]="service.bgImage" alt="">
+        </div>
+      </div>
+    </p-card>
+  }
+</div>
+
+
+
