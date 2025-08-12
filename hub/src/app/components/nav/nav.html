@@ -1,15 +1,17 @@
 <p-menubar [model]="items">
+  <ng-template #menuicon></ng-template>
   <ng-template #start>
+    <p-button rounded severity="secondary" icon="pi pi-bars"/>
     <h2 class="logo">JarVonDigital LLC</h2>
   </ng-template>
 
   <ng-template #end>
     <div class="search">
-      <p-input-group>
-        <input pInputText placeholder="Have a question?" type="text">
-      </p-input-group>
+      <!--      <input pInputText placeholder="Have a question?" type="text">-->
+      <p-button rounded severity="secondary" icon="pi pi-search"></p-button>
       <p-button
         rounded
+        severity="secondary"
         icon="pi pi-lock">
       </p-button>
     </div>

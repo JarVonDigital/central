@@ -4,10 +4,10 @@
   width: 100%;
   backdrop-filter: blur(2rem);
   background: rgba(43, 140, 252, 0.7);
+  z-index: 100;
 
   p-menubar {
     background: transparent;
-    //color: white;
     border: none;
     border-radius: 0;
     font-size: 1.4rem;

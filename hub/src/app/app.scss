@@ -1,13 +1,16 @@
 :host {
 
+  --main-image-height: 100vh;
+
   --gap: 7rem;
   --card-width: calc(50% - var(--gap));
+  --header-text-size: 2.3rem;
 
   .main-image {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: var(--main-image-height);
     overflow: hidden;
 
     img {
@@ -24,10 +27,12 @@
     flex-wrap: wrap;
     gap: var(--gap);
     margin: var(--gap);
+    overflow: auto;
 
     p-card {
       flex: var(--card-width);
       max-width: var(--card-width);
+      min-width: var(--card-width);
       overflow: hidden;
 
       --p-card-body-padding: 0;
@@ -67,7 +72,7 @@
               margin: 0;
               padding: 0 1rem;
               height: 4rem;
-              font-size: 2.3rem;
+              font-size: var(--header-text-size);
               border-radius: .8rem;
               overflow: hidden;
             }
@@ -135,12 +140,22 @@
   }
 
   @media screen and (max-width: 768px) {
-    --card-width: calc(100%);
+    --main-image-height: 500px;
+    --gap: 4rem;
+    --card-width: 100%;
+    --header-text-size: 1.8rem;
 
     .services {
-      gap: 4rem;
-      margin: 4rem;
+      justify-content: flex-start;
       flex-direction: row;
+      flex-wrap: nowrap;
+      border-radius: .8rem;
+      margin: 1rem;
+
+      p-card {
+        min-width: 30rem;
+        max-width: 20rem;
+      }
     }
   }
 }

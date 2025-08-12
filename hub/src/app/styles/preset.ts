@@ -32,13 +32,22 @@ export const secondary = {
 }
 
 
-const MyPreset = definePreset(Aura, {
+export const MyPreset = definePreset(Aura, {
   // main brand color (tawny)
   semantic: {
     primary,
     secondary,
   },
   components: {
+    inputtext: {
+      root: {
+        background: secondary[0],
+        color: secondary[800],
+        borderRadius: '1rem',
+        filledBackground: secondary[0],
+        placeholderColor: primary[800],
+      }
+    },
     card: {
       root: {
         background: primary[700],
@@ -58,5 +67,3 @@ const MyPreset = definePreset(Aura, {
     }
   },
 });
-
-export default MyPreset;
