@@ -10,3 +10,12 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.drawer-menu {
+  font-size: 1.3rem;
+
+  --p-menu-background: transparent;
+  --p-menu-border-color: transparent;
+  --p-menu-list-gap: .5rem;
+  --p-menu-item-icon-color: white;
+}

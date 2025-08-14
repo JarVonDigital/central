@@ -1,24 +1,23 @@
-import {Component} from '@angular/core';
-import {Menubar} from 'primeng/menubar';
+import {Component, signal} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {Button} from 'primeng/button';
-import {InputGroup} from 'primeng/inputgroup';
-import {InputText} from 'primeng/inputtext';
-import {InputGroupAddon} from 'primeng/inputgroupaddon';
+import {RouterLink} from '@angular/router';
+import {Drawer} from 'primeng/drawer';
+import {Menu} from 'primeng/menu';
 
 @Component({
   selector: 'app-nav',
   imports: [
-    Menubar,
     Button,
-    InputGroup,
-    InputText,
-    InputGroupAddon
+    RouterLink,
+    Drawer,
+    Menu
   ],
   templateUrl: './nav.html',
   styleUrl: './nav.scss'
 })
 export class Nav {
+  $isDrawerVisible = signal(false)
   items: MenuItem[] = [
     {
       label: 'Services',

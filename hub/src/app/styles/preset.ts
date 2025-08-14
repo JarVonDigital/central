@@ -64,6 +64,11 @@ export const MyPreset = definePreset(Aura, {
         focusBackground: primary[400],
         focusColor: secondary[0]
       }
+    },
+    drawer: {
+      root: {
+        background: primary[600]
+      }
     }
   },
 });

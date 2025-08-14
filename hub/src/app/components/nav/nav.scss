@@ -1,35 +1,91 @@
 :host {
   top: 0;
   position: fixed;
-  width: 100%;
-  backdrop-filter: blur(2rem);
-  background: rgba(43, 140, 252, 0.7);
   z-index: 100;
 
-  p-menubar {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    font-size: 1.4rem;
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    .logo {
+  height: 4rem;
+  width: 100%;
+  padding: 0 1rem;
+
+  background: transparent;
+  backdrop-filter: blur(2rem);
+  border: none;
+  border-radius: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+
+  --p-button-primary-color: white;
+  --p-button-primary-hover-color: var(--p-secondary-200);
+  --logo-font-size: 2rem;
+
+  .menu-mobile-icon {
+    display: none;
+  }
+
+  .menu-logo {
+    margin: 0 1rem;
+
+    h2 {
       font-weight: 400;
-      font-size: 2rem;
+      font-size: var(--logo-font-size);
       margin: .5rem 2rem .5rem .5rem;
-    }
-
-    .search {
-      display: flex;
-      gap: 1rem;
-      margin: 0 .5rem;
-
-      input {
-        width: 15rem;
-        font-size: 1.2rem;
-      }
     }
   }
 
+  .menu-links {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    --p-button-primary-background: transparent;
+    --p-button-primary-hover-background: var(--p-primary-400);
+    --p-button-primary-border-color: transparent;
+    --p-button-primary-hover-border-color: transparent;
+
+    --p-button-border-radius: 2rem;
+    --p-button-lg-padding-y: .5rem;
+    --p-button-lg-padding-x: .7rem;
+    --p-button-gap: .8rem;
+
+    --p-button-lg-font-size: 1.3rem;
+    --p-button-label-font-weight: 500;
+
+    ::ng-deep {
+      .p-button-icon {
+        --p-button-lg-font-size: 1rem;
+      }
+    }
+
+  }
+
+  .search {
+    display: flex;
+    gap: 1rem;
+    margin: 0 .5rem;
+
+    input {
+      width: 15rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    --logo-font-size: 1.6rem;
+
+    .menu-mobile-icon {
+      display: block;
+    }
+
+    .menu-links {
+      display: none;
+    }
+
+    .menu-logo {
+      flex: 1;
+    }
+  }
 
 }
