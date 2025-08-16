@@ -1,0 +1,18 @@
+:host {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  padding: 5rem 0;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: center;
+  background: var(--p-secondary-400);
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column; // variable
+    min-height: unset; // variable
+    max-width: unset;
+    height: unset;
+    padding: 0;
+  }
+}

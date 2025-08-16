@@ -1,0 +1,32 @@
+@let alternative = selectedAlternative();
+
+@if (alternative) {
+  @let styles = {tier: true, center: alternative.isRecommended};
+  <div [class]="styles">
+    <div class="icon">
+      <i [class]="alternative.icon"></i>
+    </div>
+
+    <h2>{{ alternative.blockTitle }}</h2>
+    <h4>{{ alternative.blockDescription }}</h4>
+
+    @if (alternatives().length > 1) {
+      <p-select-button
+        [ngModel]="alternative.id"
+        (ngModelChange)="onAlternativeChange($event)"
+        [options]="alternatives()"
+        [unselectable]="true"
+        optionLabel="id"
+        optionValue="id">
+      </p-select-button>
+    }
+
+
+    <ul>
+      @for (item of alternative.blockOptions; track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+  </div>
+}
+
