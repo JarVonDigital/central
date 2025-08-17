@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
-import {Nav} from './components/nav/nav';
 import {Card} from 'primeng/card';
-import {Pricing, PricingStruct} from '@jde/ui';
+import {NavBar, Pricing, PricingStruct} from '@jde/ui';
 
 @Component({
   selector: 'app-root',
-  imports: [Nav, Card, Pricing, Pricing],
+  imports: [Card, Pricing, Pricing, NavBar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

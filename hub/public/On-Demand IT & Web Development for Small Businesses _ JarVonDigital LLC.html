@@ -275,7 +275,7 @@
       font-weight: 500;
       --p-button-primary-color: white;
       --p-button-primary-hover-color: var(--p-secondary-200);
-      --logo-font-size: 2rem;
+      --nav-bar-logo-font-size: 2rem;
     }
 
     [_nghost-ng-c3339251965] .menu-mobile-icon[_ngcontent-ng-c3339251965] {
@@ -288,7 +288,7 @@
 
     [_nghost-ng-c3339251965] .menu-logo[_ngcontent-ng-c3339251965] h2[_ngcontent-ng-c3339251965] {
       font-weight: 400;
-      font-size: var(--logo-font-size);
+      font-size: var(--nav-bar-logo-font-size);
       margin: 0.5rem 2rem 0.5rem 0.5rem;
     }
 
@@ -325,7 +325,7 @@
 
     @media screen and (max-width: 768px) {
       [_nghost-ng-c3339251965] {
-        --logo-font-size: 1.6rem;
+        --nav-bar-logo-font-size: 1.6rem;
       }
 
       [_nghost-ng-c3339251965] .menu-mobile-icon[_ngcontent-ng-c3339251965] {
@@ -2427,7 +2427,7 @@
     border-top-color: var(--p-tooltip-background);
     border-bottom-color: var(--p-tooltip-background);
   }</style>
-  <style>.tier[_ngcontent-ng-c2702129072] {
+  <style>.block[_ngcontent-ng-c2702129072] {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -2443,7 +2443,7 @@
     transition: all .3s cubic-bezier(.2, .7, .2, 1)
   }
 
-  .tier[_ngcontent-ng-c2702129072] .icon[_ngcontent-ng-c2702129072] {
+  .block[_ngcontent-ng-c2702129072] .icon[_ngcontent-ng-c2702129072] {
     top: -3.5rem;
     display: flex;
     align-items: center;
@@ -2457,28 +2457,28 @@
     color: #fff
   }
 
-  .tier[_ngcontent-ng-c2702129072] .icon[_ngcontent-ng-c2702129072] i[_ngcontent-ng-c2702129072] {
+  .block[_ngcontent-ng-c2702129072] .icon[_ngcontent-ng-c2702129072] i[_ngcontent-ng-c2702129072] {
     font-size: 2.4rem
   }
 
-  .tier[_ngcontent-ng-c2702129072] h2[_ngcontent-ng-c2702129072] {
+  .block[_ngcontent-ng-c2702129072] h2[_ngcontent-ng-c2702129072] {
     font-size: 2.5rem;
     margin: 2rem 1rem 0
   }
 
-  .tier[_ngcontent-ng-c2702129072] h4[_ngcontent-ng-c2702129072] {
+  .block[_ngcontent-ng-c2702129072] h4[_ngcontent-ng-c2702129072] {
     margin: 0 4rem 1rem;
     text-align: center
   }
 
-  .tier[_ngcontent-ng-c2702129072] ul[_ngcontent-ng-c2702129072] {
+  .block[_ngcontent-ng-c2702129072] ul[_ngcontent-ng-c2702129072] {
     margin: 0;
     padding: 0;
     list-style: none;
     width: 100%
   }
 
-  .tier[_ngcontent-ng-c2702129072] ul[_ngcontent-ng-c2702129072] li[_ngcontent-ng-c2702129072] {
+  .block[_ngcontent-ng-c2702129072] ul[_ngcontent-ng-c2702129072] li[_ngcontent-ng-c2702129072] {
     text-align: center;
     padding: .5rem .2rem;
     margin: 0 3rem;
@@ -2486,24 +2486,24 @@
     border-bottom: 1px solid var(--p-secondary-400)
   }
 
-  .tier[_ngcontent-ng-c2702129072]:first-of-type, .tier[_ngcontent-ng-c2702129072]:last-of-type {
+  .block[_ngcontent-ng-c2702129072]:first-of-type, .block[_ngcontent-ng-c2702129072]:last-of-type {
     z-index: 0;
     max-width: 25rem
   }
 
-  .tier[_ngcontent-ng-c2702129072]:first-of-type h2[_ngcontent-ng-c2702129072], .tier[_ngcontent-ng-c2702129072]:last-of-type h2[_ngcontent-ng-c2702129072] {
+  .block[_ngcontent-ng-c2702129072]:first-of-type h2[_ngcontent-ng-c2702129072], .block[_ngcontent-ng-c2702129072]:last-of-type h2[_ngcontent-ng-c2702129072] {
     font-size: 2rem
   }
 
-  .tier[_ngcontent-ng-c2702129072]:first-of-type {
+  .block[_ngcontent-ng-c2702129072]:first-of-type {
     border-right: none
   }
 
-  .tier[_ngcontent-ng-c2702129072]:last-of-type {
+  .block[_ngcontent-ng-c2702129072]:last-of-type {
     border-left: none
   }
 
-  .tier.center[_ngcontent-ng-c2702129072] {
+  .block.center[_ngcontent-ng-c2702129072] {
     min-height: 75vh;
     min-width: 15rem;
     color: var(--p-primary-800);
@@ -2514,7 +2514,7 @@
   }
 
   @media screen and (max-width: 768px) {
-    .tier[_ngcontent-ng-c2702129072] {
+    .block[_ngcontent-ng-c2702129072] {
       flex: 1;
       max-width: unset !important;
       width: 100%;
@@ -2523,7 +2523,7 @@
       border: none
     }
 
-    .tier[_ngcontent-ng-c2702129072] .icon[_ngcontent-ng-c2702129072] {
+    .block[_ngcontent-ng-c2702129072] .icon[_ngcontent-ng-c2702129072] {
       top: 0;
       position: unset;
       margin: 0 0 2rem;
@@ -2531,15 +2531,15 @@
       width: 4rem
     }
 
-    .tier[_ngcontent-ng-c2702129072] .icon[_ngcontent-ng-c2702129072] i[_ngcontent-ng-c2702129072] {
+    .block[_ngcontent-ng-c2702129072] .icon[_ngcontent-ng-c2702129072] i[_ngcontent-ng-c2702129072] {
       font-size: 1.6rem
     }
 
-    .tier[_ngcontent-ng-c2702129072] h2[_ngcontent-ng-c2702129072] {
+    .block[_ngcontent-ng-c2702129072] h2[_ngcontent-ng-c2702129072] {
       margin-top: 0
     }
 
-    .tier[_ngcontent-ng-c2702129072] .center[_ngcontent-ng-c2702129072] {
+    .block[_ngcontent-ng-c2702129072] .center[_ngcontent-ng-c2702129072] {
       min-height: unset;
       max-width: unset;
       justify-content: unset

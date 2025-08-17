@@ -1,18 +1,24 @@
 :host {
+
+  // Variables
+  --pricing-height: 100vh;
+  --pricing-width: 100%;
+  --pricing-flex-direction: row;
+  --pricing-padding: 8rem;
+
   position: relative;
   display: flex;
-  height: 100vh;
-  width: 100%;
-  padding: 8rem;
+  flex-direction: var(--pricing-flex-direction);
   align-items: flex-end;
   justify-content: center;
+  height: var(--pricing-height);
+  width: var(--pricing-width);
+  padding: var(--pricing-padding);
   background: var(--p-secondary-400);
 
   @media screen and (max-width: 768px) {
-    flex-direction: column; // variable
-    min-height: unset; // variable
-    max-width: unset;
-    height: unset;
-    padding: 0;
+    --pricing-height: auto;
+    --pricing-flex-direction: column;
+    --pricing-padding: 0;
   }
 }

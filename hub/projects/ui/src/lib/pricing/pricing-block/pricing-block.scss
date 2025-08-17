@@ -1,17 +1,29 @@
 :host {
+
+  // Variables
+  --pricing-block-min-width: 100%;
+  --pricing-block-min-height: 60vh;
+  --pricing-block-max-width: 30rem;
+  --pricing-block-max-height: auto;
+  --pricing-block-recommended-min-width: 28rem;
+  --pricing-block-recommended-min-height: 75vh;
+
   flex: 1;
   display: flex;
   align-items: center;
   width: 100%;
 
-  .tier {
+  .block {
     flex: 1;
     display: flex;
     flex-direction: column;
-    position: relative;
     align-items: center;
     justify-content: flex-start;
-    min-height: 60vh;
+    position: relative;
+    min-height: var(--pricing-block-min-height);
+    min-width: var(--pricing-block-min-width);
+    max-height: var(--pricing-block-max-height);
+    max-width: var(--pricing-block-max-width);
     color: var(--p-primary-950);
     background-color: var(--p-secondary-100);
     transition: all .3s cubic-bezier(.2, .7, .2, 1);
@@ -45,7 +57,7 @@
     }
 
     ul {
-      margin: 0;
+      margin: 2rem 0;
       padding: 0;
       list-style: none;
       width: 100%;
@@ -60,16 +72,14 @@
     }
 
     &:first-of-type, &:last-of-type {
-      z-index: 0;
-
       h2 {
         font-size: 2rem;
       }
     }
 
     &.center {
-      min-height: 75vh;
-      min-width: 28rem;
+      min-height: var(--pricing-block-recommended-min-height);
+      min-width: var(--pricing-block-recommended-min-width);
       color: var(--p-primary-800);
       background-color: var(--p-secondary-300);
       z-index: 1;
@@ -77,13 +87,16 @@
   }
 
   @media screen and (max-width: 768px) {
+
+    // Variables
+    --pricing-block-min-width: unset;
+    --pricing-block-recommended-min-height: auto;
+    --pricing-block-recommended-min-width: unset;
+
     width: 100%;
 
-    .tier {
+    .block {
       flex: 1;
-      max-width: unset !important; // Variable
-      width: 100%;
-      height: auto;
       padding: 2rem 0;
 
       .icon {
@@ -100,12 +113,6 @@
 
       h2 {
         margin-top: 0;
-      }
-
-      &.center {
-        min-height: 100%;
-        max-width: 100%;
-        justify-content: unset;
       }
     }
   }

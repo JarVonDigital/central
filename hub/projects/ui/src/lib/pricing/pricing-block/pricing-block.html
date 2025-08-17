@@ -1,7 +1,7 @@
 @let alternative = selectedAlternative();
 
 @if (alternative) {
-  @let styles = {tier: true, center: alternative.isRecommended};
+  @let styles = {block: true, center: alternative.isRecommended};
   <div [class]="styles">
     <div class="icon">
       <i [class]="alternative.icon"></i>
@@ -16,11 +16,11 @@
         (ngModelChange)="onAlternativeChange($event)"
         [options]="alternatives()"
         [unselectable]="true"
+
         optionLabel="id"
         optionValue="id">
       </p-select-button>
     }
-
 
     <ul>
       @for (item of alternative.blockOptions; track item) {

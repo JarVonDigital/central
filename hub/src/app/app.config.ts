@@ -5,9 +5,13 @@ import {routes} from './app.routes';
 import {providePrimeNG} from 'primeng/config';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {MyPreset} from "./styles/preset";
+import {authConfig} from './auth/auth.config';
+import {provideAuth} from 'angular-auth-oidc-client';
+import {provideHttpClient} from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
@@ -16,9 +20,10 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: MyPreset,
         options: {
-          darkMode: false
+          darkModeSelector: false
         }
       }
-    })
+    }),
+    provideAuth(authConfig)
   ]
 };
