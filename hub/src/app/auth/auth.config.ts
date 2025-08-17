@@ -1,6 +1,5 @@
 import {PassedInitialConfig} from 'angular-auth-oidc-client';
 
-console.log(window.location.origin)
 export const authConfig: PassedInitialConfig = {
   config: {
     authority: 'https://cognito-idp.us-east-1.amazonaws.com/us-east-1_ulA2pvrb9',
