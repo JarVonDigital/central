@@ -1,54 +1,28 @@
-<jde-nav-bar></jde-nav-bar>
-
-<div class="main-image">
-  <img src="main-photo.jpg" alt="">
-</div>
-
-<div class="services">
-  @for (service of services; track service) {
-    <p-card>
-      <div class="content">
-        <div class="details">
-          <div class="inner">
-            <h3>{{ service.mission }}</h3>
-            <p>{{ service.statement }}</p>
-          </div>
-          <div class="detail-bg-image"></div>
-        </div>
-        <div class="bg-image">
-          <img [src]="service.bgImage" alt="">
-        </div>
-      </div>
-    </p-card>
-  }
-</div>
-
-<div class="selling-point">
-  <div class="panel">
-    <h2>No Downtime. No Hassle. No Overhead.</h2>
-    <p>Technology issues don’t wait — and neither should you. Our On-Demand Support gives your business instant access
-      to expert help for anything from website updates and SaaS troubleshooting to software integrations and performance
-      optimization. No hiring, no payroll, no long-term contracts — just fast, reliable problem-solving exactly when you
-      need it. Keep your systems running, your team productive, and your customers happy without the cost of a full-time
-      IT staff.</p>
+<a class="skip-link" href="#main">Skip to content</a
+><jde-nav-bar /><router-outlet />
+<footer class="footer">
+  <div class="container footer-top">
+    <div>
+      <a routerLink="/" aria-label="JarVonDigital home"
+        ><img
+          src="/brand/footer.svg"
+          width="205"
+          height="55"
+          alt="JarVonDigital LLC — A simple connection."
+      /></a>
+      <p>Good websites. A simple connection.</p>
+      <p>Lakeland, Florida · Working nationwide</p>
+    </div>
+    <div class="footer-contact">
+      <span class="eyebrow">Let’s build something useful.</span
+      ><a href="mailto:jarvondigital@gmail.com"
+        >jarvondigital&#64;gmail.com <span aria-hidden="true">↗</span></a
+      >
+    </div>
   </div>
-  <div class="panel">
-    <img src="image-call-guy.jpg" alt="">
+  <div class="container footer-bottom">
+    <span>© {{ year }} JarVonDigital LLC</span
+    ><a routerLink="/privacy">Privacy</a
+    ><a routerLink="/" fragment="inquiry">Start a conversation ↗</a>
   </div>
-</div>
-<div class="selling-point r">
-  <div class="panel">
-    <h2>Web Design With a Purpose.</h2>
-    <p>
-      Your website should do more than look good — it should attract customers, build trust, and drive sales. We create
-      fast, secure, mobile-friendly websites tailored to your brand and goals, with clear navigation, compelling
-      visuals, and a smooth user experience that keeps visitors engaged. Designed to grow with your business, your site
-      will be easy to manage and ready to deliver results from day one.
-    </p>
-  </div>
-  <div class="panel">
-    <img src="group-coding.jpg" alt="">
-  </div>
-</div>
-
-<jde-pricing [blocks]="pricingBlocks"></jde-pricing>
+</footer>

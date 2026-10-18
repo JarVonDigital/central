@@ -1,59 +1,40 @@
-# Hub
+# JarVonDigital marketing site
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.4.
+Angular 20 with the shared `@jde/ui` library, hosted on the existing Amplify setup.
 
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
+```sh
+npm ci
+npm run build:jde
+npm run build
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Offer definitions live in `src/app/offers.ts`; the shared pricing component renders structured prices, billing periods, scope, and CTAs. Routes are `/` and `/privacy`; navigation uses homepage section fragments.
 
-## Code scaffolding
+## Inquiry configuration
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The application reads `/site-config.json` when a valid inquiry is submitted. `npm run build` first runs `scripts/configure-site.mjs`, which takes `INQUIRY_ENDPOINT` from the environment or the config file. The endpoint must match `https://API_ID.execute-api.us-east-1.amazonaws.com/inquiries`. Set `REQUIRE_INQUIRY_CONFIG=true` for launch builds. Empty config supports local preview but cannot report a successful inquiry. The endpoint is public; no private provider keys belong in the browser.
 
-```bash
-ng generate component component-name
+The form validates on blur/submit, prevents duplicate in-flight submits, preserves fields on errors, times out after 20 seconds, and reports success only after the AWS endpoint confirms SES acceptance. The site never stores inquiry details in browser storage. Verify actual inbox receipt before launch.
+
+## Assets and operations
+
+`public/Document.svg` is preserved as supplied. Header/footer variants crop its original geometry and outline Helvetica Bold letters to avoid font substitution. The monogram is derived directly from the supplied paths. Angular excludes the original design file, archived web captures, and unused artwork from publication.
+
+See the [launch checklist](../docs/launch-checklist.md). Operational planning files and sales records are kept in the ignored local `private/` folder; they are not part of this public repository or the published website.
+
+## Verification
+
+```sh
+npx playwright install chromium webkit
+npm start -- --configuration production --host 127.0.0.1 --port 4319
+# In a separate terminal:
+TEST_BASE_URL=http://127.0.0.1:4319 npm run test:site
+TEST_BASE_URL=http://127.0.0.1:4319 npm run test:accessibility
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The browser suite uses mocked AWS inquiry responses and never sends mail. Review screenshots are saved under ignored `tmp/review/`. See [verification record](../docs/verification.md) for checked behavior and remaining live checks. `scripts/derive-brand.py` preserves the vector asset derivation; it requires `fonttools` and macOS Helvetica, and is not required to build or deploy the site.
 
-```bash
-ng generate --help
-```
+AWS infrastructure and handler tests are in [infrastructure](../infrastructure/README.md).
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The inactive marketing login and old theme packages have been removed. Angular 20 maintenance updates and the locked dependency set currently pass `npm audit` with zero reported vulnerabilities. `npm test` runs the browser and accessibility suites against the configured preview server.

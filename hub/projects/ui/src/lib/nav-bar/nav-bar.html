@@ -1,42 +1,43 @@
-<div class="menu-mobile-icon">
-  <p-button
-    rounded
-    severity="primary"
-    icon="pi pi-bars" (click)="$isDrawerVisible.set(true)"/>
-</div>
-
-<div class="menu-logo">
-  <h2 class="logo">JarVonDigital LLC</h2>
-</div>
-
-<div class="menu-links">
-  @for (link of items; track link) {
-    <p-button
-      size="large"
-      severity="primary"
-      [icon]="link.icon"
-      [routerLink]="link.routerLink"
-      [label]="link.label"/>
-  }
-</div>
-
-<div class="menu-end">
-  <div class="search">
-    <p-button rounded severity="primary" icon="pi pi-search"></p-button>
-    <p-button
-      rounded
-      severity="primary"
-      icon="pi pi-lock" (click)="onLogin()">
-    </p-button>
+<header class="header">
+  <div class="nav-shell">
+    <a
+      class="brand"
+      routerLink="/"
+      aria-label="JarVonDigital home"
+      (click)="close()"
+      ><img
+        src="/brand/header.svg"
+        width="205"
+        height="55"
+        alt="JarVonDigital LLC — A simple connection." /></a
+    ><button
+      #toggle
+      class="menu-toggle"
+      type="button"
+      [attr.aria-expanded]="open()"
+      aria-controls="main-navigation"
+      (click)="open.set(!open())"
+    >
+      {{ open() ? "Close" : "Menu" }}
+      <span aria-hidden="true">{{ open() ? "−" : "+" }}</span>
+    </button>
+    <nav
+      id="main-navigation"
+      aria-label="Main navigation"
+      [class.open]="open()"
+    >
+      @for (link of links; track link.fragment) {
+        <a routerLink="/" [fragment]="link.fragment" (click)="close()">{{
+          link.label
+        }}</a>
+      }
+      <a
+        class="button nav-cta"
+        routerLink="/"
+        fragment="inquiry"
+        (click)="close()"
+        >Request a quote <span aria-hidden="true">↗</span></a
+      >
+    </nav>
   </div>
-</div>
-
-
-<p-drawer
-  [(visible)]="$isDrawerVisible"
-  [blockScroll]="true"
-  position="left">
-  <p-menu
-    [model]="items" styleClass="drawer-menu"></p-menu>
-
-</p-drawer>
+</header>

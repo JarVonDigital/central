@@ -1,0 +1,53 @@
+import { PricingStruct } from '@jde/ui';
+export const OFFERS: PricingStruct[] = [
+  {
+    id: 'business-website',
+    name: 'Business Website',
+    description: 'A clear, considered home for your business online.',
+    price: 2250,
+    pricePrefix: 'From',
+    billingPeriod: ' / project',
+    featured: true,
+    scope: [
+      'Up to five pages',
+      'Responsive design for every screen',
+      'Inquiry form + basic on-page SEO',
+      'Light copy editing',
+      'Two revision rounds',
+    ],
+    note: '50% to start. 50% before launch. Target: three weeks after content and access are ready.',
+    cta: 'Plan my website',
+  },
+  {
+    id: 'website-improvements',
+    name: 'Website Improvements',
+    description: 'Make the website you already have work better.',
+    price: 750,
+    pricePrefix: 'From',
+    billingPeriod: ' / project',
+    scope: [
+      'A written, agreed list of fixes',
+      'Approximately six delivery hours',
+      'Mobile usability and layout fixes',
+      'Content or inquiry-flow improvements',
+    ],
+    note: 'A focused scope, agreed before work begins. Additional work quoted separately.',
+    cta: 'Improve my website',
+  },
+  {
+    id: 'website-care',
+    name: 'Website Care',
+    description: 'A little ongoing attention. One less thing on your list.',
+    price: 150,
+    pricePrefix: '',
+    billingPeriod: ' / month',
+    scope: [
+      'Routine website maintenance',
+      'Up to 30 minutes of minor content updates',
+      'Response within two business days',
+      'Additional work quoted separately',
+    ],
+    note: 'Monthly allowance expires each month. Scheduled support; no continuous emergency coverage.',
+    cta: 'Ask about care',
+  },
+];

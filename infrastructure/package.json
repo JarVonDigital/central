@@ -1,0 +1,26 @@
+{
+  "name": "jarvondigital-inquiry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "synth": "cdk synth --strict",
+    "diff": "cdk diff",
+    "deploy": "cdk deploy --outputs-file outputs.json",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.272.0",
+    "constructs": "^10.4.2",
+    "@aws-sdk/client-sesv2": "^3.0.0"
+  },
+  "devDependencies": {
+    "aws-cdk": "^2.0.0",
+    "typescript": "~5.8.3",
+    "@types/aws-lambda": "^8.10.0",
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.25.9",
+    "tsx": "^4.20.4"
+  }
+}

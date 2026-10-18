@@ -1,121 +1,96 @@
 :host {
-
-  // Variables
-  --pricing-block-min-width: 100%;
-  --pricing-block-min-height: 60vh;
-  --pricing-block-max-width: 30rem;
-  --pricing-block-max-height: auto;
-  --pricing-block-recommended-min-width: 28rem;
-  --pricing-block-recommended-min-height: 75vh;
-
-  flex: 1;
   display: flex;
-  align-items: center;
-  width: 100%;
-
-  .block {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    position: relative;
-    min-height: var(--pricing-block-min-height);
-    min-width: var(--pricing-block-min-width);
-    max-height: var(--pricing-block-max-height);
-    max-width: var(--pricing-block-max-width);
-    color: var(--p-primary-950);
-    background-color: var(--p-secondary-100);
-    transition: all .3s cubic-bezier(.2, .7, .2, 1);
-
-    .icon {
-      top: -3.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      margin-bottom: -4rem;
-      height: 7rem;
-      width: 7rem;
-      border-radius: 7rem;
-      background: var(--p-secondary-400);
-      color: white;
-
-      i {
-        font-size: 2.4rem;
-      }
-    }
-
-    h2 {
-      font-size: 2.5rem;
-      margin: 2rem 1rem 0 1rem;
-    }
-
-    h4 {
-      margin: 0 4rem 1rem 4rem;
-      text-align: center;
-    }
-
-    ul {
-      margin: 2rem 0;
-      padding: 0;
-      list-style: none;
-      width: 100%;
-
-      li {
-        text-align: center;
-        padding: .5rem .2rem;
-        margin: 0 3rem;
-        font-size: 1.2rem;
-        border-bottom: 1px solid var(--p-secondary-400);
-      }
-    }
-
-    &:first-of-type, &:last-of-type {
-      h2 {
-        font-size: 2rem;
-      }
-    }
-
-    &.center {
-      min-height: var(--pricing-block-recommended-min-height);
-      min-width: var(--pricing-block-recommended-min-width);
-      color: var(--p-primary-800);
-      background-color: var(--p-secondary-300);
-      z-index: 1;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-
-    // Variables
-    --pricing-block-min-width: unset;
-    --pricing-block-recommended-min-height: auto;
-    --pricing-block-recommended-min-width: unset;
-
-    width: 100%;
-
-    .block {
-      flex: 1;
-      padding: 2rem 0;
-
-      .icon {
-        top: 0;
-        position: unset;
-        margin: 0 0 2rem 0;
-        height: 4rem;
-        width: 4rem;
-
-        i {
-          font-size: 1.6rem;
-        }
-      }
-
-      h2 {
-        margin-top: 0;
-      }
-    }
-  }
+  min-width: 0;
 }
-
-
+.package {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--surface);
+}
+.featured {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.featured .eyebrow {
+  color: #b8d6f4;
+}
+h3 {
+  font-size: 1.55rem;
+  letter-spacing: -0.04em;
+  margin: 0.8rem 0;
+}
+p {
+  line-height: 1.6;
+}
+.package-heading p {
+  min-height: 3.2em;
+  color: var(--muted);
+  margin: 0;
+}
+.featured .package-heading p,
+.featured .note {
+  color: #d3dfeb;
+}
+.price {
+  margin: 1.7rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.prefix,
+.period {
+  font-size: 0.85rem;
+}
+strong {
+  font-size: 2.8rem;
+  letter-spacing: -0.06em;
+  font-weight: 600;
+}
+ul {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+  font-size: 0.9rem;
+}
+li {
+  display: flex;
+  gap: 0.65rem;
+  line-height: 1.5;
+}
+li span {
+  color: var(--blue);
+}
+.featured li span {
+  color: #9ed5ff;
+}
+.note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: auto;
+  margin-bottom: 1.5rem;
+}
+.button {
+  width: 100%;
+  justify-content: space-between;
+  background: var(--pale);
+  color: var(--navy);
+}
+.featured .button {
+  background: #baddfa;
+  color: var(--navy);
+}
