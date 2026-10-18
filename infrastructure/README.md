@@ -42,3 +42,13 @@ DISABLE_IAM_POLICY_AUTOPILOT_TELEMETRY=true uvx iam-policy-autopilot@latest gene
 ```
 
 `generated/inquiry-policy-analysis.json` records the baseline actions. CDK's identity grant narrows the deployed policy to the actual domain identity; the broader generated resource suggestions are not attached to the role.
+
+## Existing Amplify routing
+
+`amplify-rewrites.json` records the production app's canonical-domain redirects and privacy HTTP 200 rewrites. Apply it to the existing app with:
+
+```sh
+aws amplify update-app --app-id d36ica479ygfuy --custom-rules file://amplify-rewrites.json --region us-east-1
+```
+
+The explicit privacy rules prevent an application-rendered page from retaining a 404 HTTP status. The existing fallback is retained after those rules. Verify both response status and rendered route after propagation.

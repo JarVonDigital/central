@@ -14,9 +14,9 @@ The inquiry provider is AWS, replacing the original Formspree requirement at the
 
 ## Hosting and indexing
 
-- [x] Existing hosting has a SPA `404-200` rewrite to `/index.html`.
+- [x] Hosting includes explicit HTTP 200 rewrites for `/privacy` and `/privacy/`, plus the existing SPA fallback. Direct privacy requests were checked after publication.
 - [x] Confirm production domain configuration for `jarvon.digital` and `jarvondigital.com` on the existing app.
-- [ ] Publish and check the redesigned application, direct `/privacy` load, HTTPS, config, social preview, favicon, robots, and sitemap on the production domain.
+- [x] Published the redesigned application and checked direct `/privacy` HTTP 200, HTTPS, config, social preview, favicon, robots, and sitemap on the production domain. Amplify production job 20 succeeded.
 - [x] Exclude archived HTML/captures, unused large images, EPS artwork, the original design SVG, and old favicon from published assets. Preserve the original SVG in source.
 
 ## Product and operating plan

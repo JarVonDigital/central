@@ -1,0 +1,32 @@
+[
+  {
+    "source": "https://www.jarvon.digital",
+    "target": "https://jarvon.digital",
+    "status": "301"
+  },
+  {
+    "source": "https://jarvondigital.com",
+    "target": "https://jarvon.digital",
+    "status": "301"
+  },
+  {
+    "source": "https://www.jarvondigital.com",
+    "target": "https://jarvon.digital",
+    "status": "301"
+  },
+  {
+    "source": "/privacy",
+    "target": "/index.html",
+    "status": "200"
+  },
+  {
+    "source": "/privacy/",
+    "target": "/index.html",
+    "status": "200"
+  },
+  {
+    "source": "/<*>",
+    "target": "/index.html",
+    "status": "404-200"
+  }
+]

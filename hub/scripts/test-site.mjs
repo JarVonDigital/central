@@ -239,7 +239,13 @@ for (const [name, engine] of Object.entries({ chromium, webkit })) {
     await page.locator("link[rel=canonical]").getAttribute("href"),
     "https://jarvon.digital/privacy",
   );
-  await page.reload();
+  const privacyResponse = await page.reload();
+  assert.equal(
+    privacyResponse?.status(),
+    200,
+    "privacy direct request must return HTTP 200",
+  );
+  checks++;
   await page.getByRole("heading", { name: "Inquiry privacy." }).waitFor();
   await page
     .getByRole("link", { name: "Back to your inquiry", exact: false })
