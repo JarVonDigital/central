@@ -3,7 +3,7 @@
 ## Website and accessibility
 
 - Production shared library and Angular application builds pass. Angular remains on version 20, updated to its compatible 20.3 maintenance releases. Initial assets are approximately 337 kB raw / 90 kB estimated transfer.
-- The browser suite covers Chromium and WebKit at 360, 390, 768, and 1440 pixels, including layout overflow, logo loading, all section fragments, mobile navigation, Escape/focus behavior, package selection, inline validation, duplicate-submit protection, and provider failure recovery.
+- All 78 production browser checks pass in Chromium and WebKit at 360, 390, 768, and 1440 pixels, including layout overflow, logo loading, all section fragments, mobile navigation, Escape/focus behavior, package selection, inline validation, duplicate-submit protection, and provider failure recovery.
 - All package CTAs select the intended offer, including repeat selection after a manual change and restarting after a successful inquiry.
 - `/privacy` direct load/refresh, page metadata/canonicals, and restoration after returning home are tested.
 - Axe WCAG A/AA checks cover all four viewport widths. Separate touch-navigation checks cover the menu and section links, reduced transparency/motion, and the privacy page.
@@ -32,4 +32,9 @@ The 60-day plan, personal outreach drafts, weekly review, and private log are pr
 
 ## Publication
 
-Production website publication and deployed-domain smoke checks are recorded after the final release below.
+- PR #1 was merged to the production branch; Amplify job 20 completed BUILD, DEPLOY, and VERIFY successfully for commit `77c0d345435c93aabfe8491c66170f2834a67b03`.
+- `https://jarvon.digital/` serves the redesigned site. The live browser suite passes all 78 checks plus the separate accessibility/touch checks.
+- The initial live HTTP check found that `/privacy` rendered the application while returning 404. Explicit 200 rewrites for `/privacy` and `/privacy/` corrected this; the suite now asserts the direct-request status as well as visible content. Rewrite configuration is saved in `infrastructure/amplify-rewrites.json`.
+- All three alternate hosts return 301 redirects to the matching path on `https://jarvon.digital`; canonical-domain and `/privacy` redirects were checked directly.
+- Homepage, direct privacy route, site config, sitemap, robots, all three SVG brand variants, Apple icon, and social preview return HTTP 200 with their expected content types. Original design SVG and retired image/EPS paths no longer return those assets.
+- The AWS test inquiry reached the intended inbox before production publication, as confirmed by the owner. An extra manual browser form check was interrupted by a Chrome extension before submission; it was not used as evidence of delivery. The automated production browser suite uses mocked service responses; real service delivery is established by the live API request and owner inbox confirmation above.
