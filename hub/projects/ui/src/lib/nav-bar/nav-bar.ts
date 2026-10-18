@@ -1,38 +1,44 @@
-import {Component, inject, signal} from '@angular/core';
-import {Button} from "primeng/button";
-import {Drawer} from "primeng/drawer";
-import {Menu} from "primeng/menu";
-import {MenuItem} from 'primeng/api';
-import {RouterLink} from '@angular/router';
-import {OidcSecurityService} from 'angular-auth-oidc-client';
-
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'jde-nav-bar',
-  imports: [
-    Button,
-    Drawer,
-    Menu,
-    RouterLink
-  ],
+  imports: [RouterLink],
   templateUrl: './nav-bar.html',
-  styleUrl: './nav-bar.scss'
+  styleUrl: './nav-bar.scss',
 })
 export class NavBar {
-  $isDrawerVisible = signal(false)
-  items: MenuItem[] = [
-    {
-      label: 'Services',
-      icon: 'pi pi-desktop'
-    },
-    {
-      label: 'Get Started',
-      icon: 'pi pi-send'
-    }
-  ]
-
-  private authService: OidcSecurityService = inject(OidcSecurityService);
-
-  onLogin() {
-    this.authService.authorize();
+  open = signal(false);
+  private element = inject(ElementRef<HTMLElement>);
+  toggle = viewChild<ElementRef<HTMLButtonElement>>('toggle');
+  links = [
+    { label: 'Services', fragment: 'services' },
+    { label: 'Work', fragment: 'work' },
+    { label: 'Packages', fragment: 'pricing' },
+    { label: 'About', fragment: 'founder' },
+  ];
+  close(returnFocus = false) {
+    this.open.set(false);
+    if (returnFocus) this.toggle()?.nativeElement.focus();
+  }
+  @HostListener('document:keydown.escape') escape() {
+    if (this.open()) this.close(true);
+  }
+  @HostListener('document:click', ['$event']) outside(event: Event) {
+    if (!this.element.nativeElement.contains(event.target as Node))
+      this.close();
+  }
+  @HostListener('focusout', ['$event']) focusOut(event: FocusEvent) {
+    if (
+      event.relatedTarget &&
+      !this.element.nativeElement.contains(event.relatedTarget as Node)
+    )
+      this.close();
   }
 }

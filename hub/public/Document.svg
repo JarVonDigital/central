@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1600 900" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:affinity="https://www.affinity.studio/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="primary-lockup" transform="matrix(1,0,0,1,279.285605,90)">
+        <g id="monogram" transform="matrix(1,0,0,1,110,250)">
+            <path d="M166,0C195.803,0 220,24.197 220,54L220,166C220,195.803 195.803,220 166,220L54,220C24.197,220 0,195.803 0,166L0,54C0,24.197 24.197,0 54,0L166,0Z" style="fill:rgb(25,42,58);"/>
+            <path d="M73,54L155,54L155,137C155,161 136,180 112,180L73,180L73,138L102,138C110,138 114,134 114,126L114,96L73,96L73,54Z" style="fill:url(#_Linear1);fill-rule:nonzero;"/>
+            <circle cx="159" cy="55" r="13" style="fill:rgb(158,213,255);"/>
+            <circle cx="73" cy="177" r="13" style="fill:rgb(158,213,255);"/>
+        </g>
+        <g id="wordmark" transform="matrix(1,0,0,1,390,218)">
+            <g transform="matrix(1,0,0,1,4,63)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Bold', 'Helvetica';font-weight:700;font-size:36px;fill:rgb(79,134,197);">J<tspan x="24.341px 54.66px 84.345px 112.676px 144.998px " y="0px 0px 0px 0px 0px ">ARVON</tspan></text>
+            </g>
+            <g transform="matrix(1,0,0,1,0,184)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Bold', 'Helvetica';font-weight:700;font-size:142px;fill:rgb(25,42,58);">D<tspan x="96.868px 130.64px 235.412px 269.184px 339.774px 436.642px " y="0px 0px 0px 0px 0px 0px ">IGITAL</tspan></text>
+            </g>
+            <g transform="matrix(0.859886,0,0,0.859886,0.560456,30.474781)">
+                <path d="M627.5,216C628.328,216 629,216.672 629,217.5C629,218.328 628.328,219 627.5,219L5.5,219C4.672,219 4,218.328 4,217.5C4,216.672 4.672,216 5.5,216L627.5,216Z" style="fill:rgb(121,182,230);fill-opacity:0.7;"/>
+            </g>
+            <g transform="matrix(1,0,0,1,4,246)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Bold', 'Helvetica';font-weight:700;font-size:22px;fill:rgb(79,134,197);">A<tspan x="16.622px 24.274px 40.488px 48.14px 68.007px 84.22px 99.199px 115.413px 123.065px 140.493px 159.145px 176.573px 194px 210.214px 227.642px 242.62px 250.273px 268.925px 286.353px " y="0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px "> SIMPLE CONNECTION.</tspan></text>
+            </g>
+            <g transform="matrix(1,0,0,1,480.894023,159)">
+                <text x="0px" y="0px" style="font-family:'Helvetica-Bold', 'Helvetica';font-weight:700;font-size:20px;fill:rgb(79,134,197);">L<tspan x="12.417px 24.834px " y="0px 0px ">LC</tspan></text>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(82,126,-126,82,73,54)"><stop offset="0" style="stop-color:rgb(121,182,230);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(79,134,197);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>

@@ -1,0 +1,174 @@
+@if (status() === "success") {
+  <div class="success" role="status">
+    <span class="success-icon" aria-hidden="true">✓</span>
+    <h3>We’re connected.</h3>
+    <p>{{ message() }}</p>
+    <button type="button" class="button secondary" (click)="another()">
+      Send another inquiry
+    </button>
+  </div>
+} @else {
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    novalidate
+    aria-label="Request a quote"
+    [attr.aria-busy]="status() === 'submitting'"
+  >
+    <div class="honeypot" aria-hidden="true">
+      <label for="contactFax">Leave this field empty</label
+      ><input
+        id="contactFax"
+        formControlName="contactFax"
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </div>
+    <fieldset [disabled]="status() === 'submitting'">
+      <legend class="sr-only">Tell me about your project</legend>
+      <div class="form-grid">
+        <div class="field">
+          <label for="name">Your name</label
+          ><input
+            id="name"
+            formControlName="name"
+            required
+            autocomplete="name"
+            maxlength="100"
+            [attr.aria-invalid]="invalid('name')"
+            aria-describedby="name-error"
+          />
+          @if (invalid("name")) {
+            <small id="name-error">Enter your name.</small>
+          }
+        </div>
+        <div class="field">
+          <label for="email">Email address</label
+          ><input
+            id="email"
+            type="email"
+            formControlName="email"
+            required
+            autocomplete="email"
+            maxlength="254"
+            [attr.aria-invalid]="invalid('email')"
+            aria-describedby="email-error"
+          />
+          @if (invalid("email")) {
+            <small id="email-error">Enter a valid email address.</small>
+          }
+        </div>
+        <div class="field full">
+          <label for="business">Business name</label
+          ><input
+            id="business"
+            formControlName="business"
+            required
+            autocomplete="organization"
+            maxlength="150"
+            [attr.aria-invalid]="invalid('business')"
+            aria-describedby="business-error"
+          />
+          @if (invalid("business")) {
+            <small id="business-error">Enter your business name.</small>
+          }
+        </div>
+        <div class="field">
+          <label for="offer">What can I help with?</label
+          ><select
+            id="offer"
+            formControlName="offer"
+            required
+            [attr.aria-invalid]="invalid('offer')"
+            aria-describedby="offer-error"
+          >
+            <option value="" disabled>Select a service</option>
+            @for (item of offers; track item.id) {
+              <option [value]="item.id">{{ item.name }}</option>
+            }
+          </select>
+          @if (invalid("offer")) {
+            <small id="offer-error">Choose a service.</small>
+          }
+        </div>
+        <div class="field">
+          <label for="budget">Budget range</label
+          ><select
+            id="budget"
+            formControlName="budget"
+            required
+            [attr.aria-invalid]="invalid('budget')"
+            aria-describedby="budget-error"
+          >
+            <option value="" disabled>Select a range</option>
+            <option>$150/month — care</option>
+            <option>$750–$2,249</option>
+            <option>$2,250–$3,499</option>
+            <option>$3,500–$5,000</option>
+            <option>$5,000+</option>
+            <option>I’d like guidance</option>
+          </select>
+          @if (invalid("budget")) {
+            <small id="budget-error">Choose a range or ask for guidance.</small>
+          }
+        </div>
+        <div class="field full">
+          <label for="website">Current website <span>(optional)</span></label
+          ><input
+            id="website"
+            type="url"
+            formControlName="website"
+            autocomplete="url"
+            placeholder="https://"
+            maxlength="500"
+            [attr.aria-invalid]="invalid('website')"
+            aria-describedby="website-error"
+          />
+          @if (invalid("website")) {
+            <small id="website-error"
+              >Use a complete URL, such as https://yourbusiness.com.</small
+            >
+          }
+        </div>
+        <div class="field full">
+          <label for="description">Tell me about your project</label
+          ><textarea
+            id="description"
+            formControlName="description"
+            required
+            rows="4"
+            maxlength="4000"
+            placeholder="What do you do, and what would you like your website to do better?"
+            [attr.aria-invalid]="invalid('description')"
+            aria-describedby="description-error"
+          ></textarea>
+          @if (invalid("description")) {
+            <small id="description-error"
+              >Add a short description of your project.</small
+            >
+          }
+        </div>
+      </div>
+    </fieldset>
+    <p class="privacy-note">
+      All fields required except your website. Your details are used to respond
+      to your inquiry.
+      <a routerLink="/privacy">How your information is handled</a>.
+    </p>
+    <button class="button" type="submit" [disabled]="status() === 'submitting'">
+      {{ status() === "submitting" ? "Sending…" : "Request my quote" }}
+      <span aria-hidden="true">↗</span>
+    </button>
+    <p
+      class="form-status"
+      [class.error]="status() === 'error'"
+      role="status"
+      aria-live="polite"
+    >
+      {{ message() }}
+    </p>
+    @if (status() === "error") {
+      <a href="mailto:jarvondigital@gmail.com">Email your inquiry instead ↗</a>
+    }
+  </form>
+}

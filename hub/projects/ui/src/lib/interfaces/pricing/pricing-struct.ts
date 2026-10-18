@@ -1,10 +1,12 @@
 export interface PricingStruct {
   id: string;
-  blockTitle: string;
-  blockDescription: string;
-  blockOptions: string[];
-  label?: string;
-  icon?: string;
-  isRecommended?: boolean;
-  alternatives?: PricingStruct[]
+  name: string;
+  description: string;
+  price: number;
+  pricePrefix: string;
+  billingPeriod: string;
+  scope: readonly string[];
+  note: string;
+  cta: string;
+  featured?: boolean;
 }

@@ -1,15 +1,13 @@
-import {Component, input, InputSignal} from '@angular/core';
-import {PricingStruct} from '../interfaces/pricing/pricing-struct';
-import {PricingBlock} from './pricing-block/pricing-block';
-
+import { Component, input, output } from '@angular/core';
+import { PricingStruct } from '../interfaces/pricing/pricing-struct';
+import { PricingBlock } from './pricing-block/pricing-block';
 @Component({
   selector: 'jde-pricing',
-  imports: [
-    PricingBlock
-  ],
+  imports: [PricingBlock],
   templateUrl: './pricing.html',
-  styleUrl: './pricing.scss'
+  styleUrl: './pricing.scss',
 })
 export class Pricing {
-  blocks: InputSignal<PricingStruct[]> = input.required();
+  blocks = input.required<PricingStruct[]>();
+  offerSelected = output<string>();
 }

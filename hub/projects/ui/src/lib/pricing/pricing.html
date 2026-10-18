@@ -1,3 +1,6 @@
-@for (block of blocks(); track block.blockTitle) {
-  <jde-pricing-block [block]="block"></jde-pricing-block>
+@for (block of blocks(); track block.id) {
+  <jde-pricing-block
+    [block]="block"
+    (offerSelected)="offerSelected.emit($event)"
+  />
 }

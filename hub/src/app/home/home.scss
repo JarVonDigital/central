@@ -1,0 +1,457 @@
+.section-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.section-intro h2 {
+  margin-bottom: 0;
+}
+.section-intro > .section-lead {
+  max-width: 25rem;
+  margin-bottom: 0.2rem;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+.service-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--pale);
+  border-radius: 0.9rem;
+  color: #426f9c;
+  font-size: 1.4rem;
+}
+.services-grid h3 {
+  font-size: 1.2rem;
+  margin: 1.3rem 0 1rem;
+}
+.services-grid p {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.services-grid a {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.work-section {
+  background: #eef2f4;
+}
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.work-card {
+  min-width: 0;
+}
+.concept-preview {
+  border-radius: 1.2rem;
+  overflow: hidden;
+  min-height: 20rem;
+  padding: 2rem;
+  color: #2e4b3c;
+  background: #e2e8de;
+}
+.concept-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+}
+.concept-nav > span {
+  font-size: 0.45rem;
+  letter-spacing: 0.1em;
+}
+.concept-nav > strong {
+  letter-spacing: 0.05em;
+}
+.contractor-layout {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 16rem;
+}
+.contractor-layout h3 {
+  position: relative;
+  z-index: 1;
+  font:
+    2.4rem/1.05 Georgia,
+    serif;
+  letter-spacing: -0.04em;
+  margin: 1rem 0 1.5rem;
+}
+.concept-label {
+  display: inline-block;
+  font-size: 0.55rem;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.4rem;
+  position: relative;
+  z-index: 1;
+}
+.architecture {
+  position: absolute;
+  right: -3rem;
+  bottom: -2rem;
+  width: 15rem;
+  height: 12rem;
+}
+.roof {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  width: 12rem;
+  height: 6rem;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: #3a5549;
+}
+.wall {
+  position: absolute;
+  right: 2rem;
+  bottom: 0;
+  width: 10rem;
+  height: 6.5rem;
+  background: #f8f2e2;
+}
+.window {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 3rem;
+  height: 3rem;
+  background: #adc4bd;
+  border: 4px solid #fff;
+}
+.door {
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
+  width: 2.6rem;
+  height: 4.5rem;
+  background: #547265;
+}
+.land {
+  position: absolute;
+  width: 18rem;
+  height: 1.5rem;
+  background: #a6b99b;
+  bottom: 0;
+  left: -2rem;
+  border-radius: 100% 0 0 0;
+}
+.cleaning .concept-preview {
+  background: #f4ead8;
+  color: #444d80;
+}
+.cleaning .concept-nav > strong {
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+.spark {
+  padding-left: 0.25rem;
+  color: #747faf;
+}
+.cleaning-layout {
+  position: relative;
+  padding-top: 2.4rem;
+  min-height: 16rem;
+}
+.cleaning-layout h3 {
+  position: relative;
+  z-index: 1;
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  margin: 1rem 0;
+}
+.cleaning-shape {
+  position: absolute;
+  right: -0.5rem;
+  top: 1.5rem;
+  font-size: 13rem;
+  color: #d1ccdf;
+  line-height: 1;
+  transform: rotate(15deg);
+}
+.work-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1.5rem 0.2rem;
+}
+.work-caption .eyebrow {
+  font-size: 0.58rem;
+}
+.work-caption h3 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+.work-caption p {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.concept-tag {
+  font-size: 0.55rem;
+  white-space: nowrap;
+  border: 1px solid #aab8c1;
+  border-radius: 2rem;
+  padding: 0.35rem 0.6rem;
+  align-self: flex-start;
+  margin-top: 0.2rem;
+}
+.pricing-intro {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto 3rem;
+}
+.pricing-intro .section-lead {
+  margin-inline: auto;
+}
+.scope-note {
+  display: flex;
+  gap: 1rem;
+  max-width: 54rem;
+  margin: 2rem auto 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.scope-note > span {
+  font-size: 1.5rem;
+  color: var(--blue);
+}
+.process-section {
+  background: var(--navy);
+  color: #fff;
+}
+.process-section .eyebrow {
+  color: #a3c7eb;
+}
+.process-section .section-lead,
+.process-section p {
+  color: #c9d5e0;
+}
+.process-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  padding: 0;
+  margin: 3rem 0 2.5rem;
+}
+.step-number {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: #91b9df;
+  padding-top: 1rem;
+  border-top: 1px solid #617485;
+}
+.process-grid h3 {
+  font-size: 1.25rem;
+  margin: 1.3rem 0;
+}
+.process-grid p {
+  font-size: 0.9rem;
+}
+.process-foot {
+  padding-top: 1.5rem;
+  border-top: 1px solid #617485;
+  font-size: 0.75rem;
+  margin: 0;
+}
+.founder-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 6rem;
+  align-items: center;
+}
+.founder-card {
+  background: #e6edf1;
+  border-radius: 1.5rem;
+  padding: 3rem;
+  position: relative;
+}
+.founder-card img {
+  width: 4.5rem;
+}
+.founder-card .founder-statement {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+  margin: 2rem 0;
+}
+.founder-signature {
+  font-size: 1.2rem;
+  font-weight: 550;
+  letter-spacing: -0.02em;
+}
+.founder-signature span {
+  display: block;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  margin-top: 0.4rem;
+  color: var(--muted);
+}
+.founder-location {
+  display: block;
+  border-top: 1px solid #b5c6d3;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  font-size: 0.7rem;
+  color: #426583;
+}
+.founder-copy > p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.founder-copy .experience-note {
+  font-size: 0.75rem;
+}
+.faq-section {
+  background: #f1f3f0;
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 5rem;
+}
+.faq-list {
+  border-top: 1px solid #b9c8d1;
+}
+details {
+  border-bottom: 1px solid #b9c8d1;
+}
+summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 1.4rem 0;
+  min-height: 3rem;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary > span {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+details[open] summary > span {
+  transform: rotate(45deg);
+}
+details p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding: 0 2rem 1rem 0;
+}
+.inquiry-section {
+  background: #e9f0f6;
+}
+.inquiry-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 5rem;
+}
+.inquiry-email {
+  display: inline-block;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  overflow-wrap: anywhere;
+}
+.inquiry-aside {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 4rem;
+}
+.inquiry-aside p {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0;
+}
+@media (max-width: 64rem) {
+  .founder-grid {
+    gap: 3rem;
+  }
+  .inquiry-grid {
+    gap: 3rem;
+  }
+  .concept-preview {
+    padding: 1.5rem;
+  }
+  .concept-tag {
+    display: none;
+  }
+  .faq-grid {
+    gap: 3rem;
+  }
+}
+@media (max-width: 48rem) {
+  .section-intro {
+    display: block;
+    margin-bottom: 2rem;
+  }
+  .section-intro > .section-lead {
+    margin-top: 1.5rem;
+  }
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .services-grid article {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0 1rem;
+  }
+  .services-grid h3 {
+    margin: 0.7rem 0 1rem;
+  }
+  .services-grid p,
+  .services-grid a {
+    grid-column: 2;
+  }
+  .work-grid,
+  .founder-grid,
+  .faq-grid,
+  .inquiry-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .concept-preview {
+    min-height: 20rem;
+  }
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .process-grid h3 {
+    margin: 1rem 0;
+  }
+  .founder-card {
+    padding: 2rem;
+  }
+  .inquiry-aside {
+    margin-top: 2rem;
+  }
+  .faq-grid h2 br {
+    display: none;
+  }
+}

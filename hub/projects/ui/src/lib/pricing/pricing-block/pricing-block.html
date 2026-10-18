@@ -1,32 +1,25 @@
-@let alternative = selectedAlternative();
-
-@if (alternative) {
-  @let styles = {block: true, center: alternative.isRecommended};
-  <div [class]="styles">
-    <div class="icon">
-      <i [class]="alternative.icon"></i>
-    </div>
-
-    <h2>{{ alternative.blockTitle }}</h2>
-    <h4>{{ alternative.blockDescription }}</h4>
-
-    @if (alternatives().length > 1) {
-      <p-select-button
-        [ngModel]="alternative.id"
-        (ngModelChange)="onAlternativeChange($event)"
-        [options]="alternatives()"
-        [unselectable]="true"
-
-        optionLabel="id"
-        optionValue="id">
-      </p-select-button>
-    }
-
-    <ul>
-      @for (item of alternative.blockOptions; track item) {
-        <li>{{ item }}</li>
-      }
-    </ul>
+<article class="package" [class.featured]="block().featured">
+  <div class="package-heading">
+    <span class="eyebrow">{{
+      block().featured
+        ? "Your next chapter"
+        : "A little support goes a long way"
+    }}</span>
+    <h3>{{ block().name }}</h3>
+    <p>{{ block().description }}</p>
   </div>
-}
-
+  <p class="price">
+    <span class="prefix">{{ block().pricePrefix }}</span>
+    <strong>{{ block().price | currency: "USD" : "symbol" : "1.0-0" }}</strong
+    ><span class="period">{{ block().billingPeriod }}</span>
+  </p>
+  <ul>
+    @for (item of block().scope; track item) {
+      <li><span aria-hidden="true">✓</span>{{ item }}</li>
+    }
+  </ul>
+  <p class="note">{{ block().note }}</p>
+  <a class="button" href="#inquiry" (click)="offerSelected.emit(block().id)"
+    >{{ block().cta }} <span aria-hidden="true">↗</span></a
+  >
+</article>
