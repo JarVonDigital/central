@@ -2,7 +2,7 @@
 
 The Angular website stays on its existing Amplify app. A separate CDK stack adds API Gateway HTTP API → on-demand Lambda → SES. This synchronous handler has no HTTP server or background workflow. HTTP API provides native CORS and a small stage throttle without the extra features of REST API.
 
-The endpoint accepts `POST /inquiries`. It checks the origin, JSON body size, required fields, offer and budget allowlists, URL schemes, email headers, and a hidden honeypot. It sends a plain-text notification only to `jarvondigital@gmail.com` from the verified `website@jarvon.digital` identity. The visitor email is used only as Reply-To; no visitor autoresponder is sent. This allows the closed-recipient workflow to operate in the SES sandbox after destination verification.
+The endpoint accepts `POST /inquiries`. It checks the origin, JSON body size, required fields, offer and budget allowlists, URL schemes, email headers, a hidden honeypot, and a Google reCAPTCHA v2 token verified for the request origin's hostname. It sends a plain-text notification only to `jarvondigital@gmail.com` from the verified `website@jarvon.digital` identity. The visitor email is used only as Reply-To; no visitor autoresponder is sent. This allows the closed-recipient workflow to operate in the SES sandbox after destination verification.
 
 Success is returned only after SES supplies a message identifier. SES acceptance does not establish inbox receipt; verify a real test message separately. Transient failures return a recoverable error. The browser retains the form and prevents duplicate in-flight sends. An uncertain network timeout may have already been accepted by SES; a manual retry can create a duplicate notification.
 
@@ -25,6 +25,7 @@ The application stack and artifact stack have termination protection. Review dif
 
 ## Configuration and limits
 
+- Register a reCAPTCHA v2 **I'm not a robot** checkbox for each production hostname in the [Google reCAPTCHA admin console](https://www.google.com/recaptcha/admin). Put its public site key in the Amplify build variable `RECAPTCHA_SITE_KEY` and create an AWS Secrets Manager plaintext secret named `jarvondigital/recaptcha-v2` containing its secret key before deploying this stack. Add the Amplify preview hostname to the key's allowed domains if testing there. Deploy the backend before publishing the updated site.
 - Write the output `InquiryEndpoint` into `hub/public/site-config.json` as `inquiryEndpoint`, or set `INQUIRY_ENDPOINT` in the Amplify build environment.
 - Set `REQUIRE_INQUIRY_CONFIG=true` for release builds.
 - Allowed origins are the production domains and existing Amplify `main` domain. Add an explicit preview origin before testing from a new branch; local browser tests mock the network.

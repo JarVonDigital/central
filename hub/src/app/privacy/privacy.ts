@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
     <a routerLink="/" fragment="inquiry">← Back to your inquiry</a>
     <p class="eyebrow">Your information</p>
     <h1>Inquiry privacy.</h1>
-    <p>Last updated October 18, 2026</p>
+    <p>Last updated October 20, 2026</p>
     <h2>What you share</h2>
     <p>
       When you request a quote, JarVonDigital LLC receives your name, email
@@ -31,6 +31,13 @@ import { RouterLink } from '@angular/router';
         rel="noopener noreferrer"
         >Read AWS’s privacy notice (opens in a new tab)</a
       >.
+    </p>
+    <p>
+      The inquiry form uses Google reCAPTCHA to check for automated submissions.
+      Google processes the verification and may receive technical information
+      such as your IP address and browser details, and may use cookies. See
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy policy (opens in a new tab)</a>
+      and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">terms (opens in a new tab)</a>.
     </p>
     <h2>Storage and sharing</h2>
     <p>

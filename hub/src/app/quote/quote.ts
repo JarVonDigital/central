@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, signal } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -30,7 +30,8 @@ const nonBlank = Validators.pattern(/\S/);
   templateUrl: './quote.html',
   styleUrl: './quote.scss',
 })
-export class Quote {
+export class Quote implements AfterViewInit, OnDestroy {
+  @ViewChild('captchaContainer') captchaContainer?: ElementRef<HTMLDivElement>;
   offers = OFFERS;
   private fb = inject(FormBuilder);
   form = this.fb.nonNullable.group({
@@ -58,6 +59,60 @@ export class Quote {
   });
   status = signal<'idle' | 'submitting' | 'success' | 'error'>('idle');
   message = signal('');
+  captchaMessage = signal('Loading verification…');
+  private captchaToken = '';
+  private captchaSiteKey = '';
+  private widgetId?: number;
+  private destroyed = false;
+  private readonly captchaCallback = `jarvonRecaptchaLoaded${Math.random().toString(36).slice(2)}`;
+
+  async ngAfterViewInit() {
+    try {
+      const response = await fetch('/site-config.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error('configuration');
+      const config = await response.json();
+      if (typeof config.recaptchaSiteKey !== 'string' || !/^[A-Za-z0-9_-]{10,}$/.test(config.recaptchaSiteKey))
+        throw new Error('configuration');
+      if (this.destroyed) return;
+      this.captchaSiteKey = config.recaptchaSiteKey;
+      const global = window as typeof window & { grecaptcha?: RecaptchaApi; [key: string]: unknown };
+      global[this.captchaCallback] = () => this.renderCaptcha();
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?onload=${this.captchaCallback}&render=explicit`;
+      script.async = true;
+      script.defer = true;
+      script.onerror = () => this.captchaMessage.set('Verification could not load. Please retry or email us.');
+      document.head.appendChild(script);
+    } catch {
+      if (!this.destroyed) this.captchaMessage.set('Verification is unavailable. Please email us instead.');
+    }
+  }
+
+  ngOnDestroy() {
+    this.destroyed = true;
+    delete (window as typeof window & { [key: string]: unknown })[this.captchaCallback];
+  }
+
+  private renderCaptcha() {
+    if (this.destroyed || !this.captchaContainer || !this.captchaSiteKey) return;
+    const api = (window as typeof window & { grecaptcha?: RecaptchaApi }).grecaptcha;
+    this.widgetId = api?.render(this.captchaContainer.nativeElement, {
+      sitekey: this.captchaSiteKey,
+      callback: (token: string) => {
+        this.captchaToken = token;
+        this.captchaMessage.set('');
+      },
+      'expired-callback': () => {
+        this.captchaToken = '';
+        this.captchaMessage.set('Verification expired. Please check the box again.');
+      },
+      'error-callback': () => {
+        this.captchaToken = '';
+        this.captchaMessage.set('Verification could not load. Please retry or email us.');
+      },
+    });
+    this.captchaMessage.set('');
+  }
   invalid(field: keyof typeof this.form.controls) {
     const c = this.form.controls[field];
     return c.invalid && c.touched;
@@ -76,6 +131,11 @@ export class Quote {
         (key) => this.form.get(key)?.invalid,
       );
       if (field) document.getElementById(field)?.focus();
+      return;
+    }
+    if (!this.captchaToken) {
+      this.captchaMessage.set('Please complete the reCAPTCHA check.');
+      this.captchaContainer?.nativeElement.scrollIntoView({ block: 'center' });
       return;
     }
     this.status.set('submitting');
@@ -105,6 +165,7 @@ export class Quote {
         },
         body: JSON.stringify({
           ...values,
+          recaptchaToken: this.captchaToken,
         }),
         signal: controller.signal,
       });
@@ -121,11 +182,21 @@ export class Quote {
       );
     } finally {
       clearTimeout(timeout);
+      this.captchaToken = '';
+      if (this.status() !== 'success' && this.widgetId !== undefined)
+        (window as typeof window & { grecaptcha?: RecaptchaApi }).grecaptcha?.reset(this.widgetId);
     }
   }
   another() {
     this.form.reset();
     this.status.set('idle');
     this.message.set('');
+    this.captchaMessage.set('');
+    setTimeout(() => this.renderCaptcha(), 0);
   }
+}
+
+interface RecaptchaApi {
+  render(container: HTMLElement, options: Record<string, unknown>): number;
+  reset(widgetId: number): void;
 }

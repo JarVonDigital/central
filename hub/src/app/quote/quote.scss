@@ -64,6 +64,20 @@ small,
   color: var(--muted);
   margin: 1.25rem 0;
 }
+.captcha {
+  margin: 0 0 1.25rem;
+  min-height: 4.875rem;
+}
+.captcha-message {
+  color: #962727;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+}
+.captcha-fallback {
+  display: inline-block;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
 .form-status {
   font-size: 0.9rem;
   margin: 1rem 0 0;

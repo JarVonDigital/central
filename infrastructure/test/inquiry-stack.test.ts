@@ -27,6 +27,7 @@ test("infrastructure scopes mail access, throttles the public route, and preserv
       Variables: Match.objectLike({
         RECIPIENT_EMAIL: "jarvondigital@gmail.com",
         SENDER_EMAIL: "website@jarvon.digital",
+        RECAPTCHA_SECRET_KEY: Match.anyValue(),
       }),
     },
   });

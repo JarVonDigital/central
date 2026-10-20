@@ -11,11 +11,18 @@ const valid = {
   website: "",
   description: "Please help with a business website.",
   contactFax: "",
+  recaptchaToken: "test-captcha-token",
 };
 const config = {
   from: "website@jarvon.digital",
   recipient: "jarvondigital@gmail.com",
   origins: ["https://jarvon.digital"],
+  recaptchaSecret: "test-secret",
+  verifyCaptcha: async (token: string, secret: string) => {
+    assert.equal(token, "test-captcha-token");
+    assert.equal(secret, "test-secret");
+    return { success: true, hostname: "jarvon.digital" };
+  },
 };
 function event(
   data: unknown = valid,
@@ -42,6 +49,7 @@ test("sends a plain-text notification only to the configured inbox, with a valid
     assert.deepEqual(input.ReplyToAddresses, ["owner@example.com"]);
     assert.equal(input.FromEmailAddress, "website@jarvon.digital");
     assert.match(input.Content!.Simple!.Body!.Text!.Data!, /Test Business/);
+    assert.doesNotMatch(input.Content!.Simple!.Body!.Text!.Data!, /test-captcha-token/);
     assert.equal(input.Content!.Simple!.Body!.Html, undefined);
     return { MessageId: "test-message" };
   }, config);
@@ -83,6 +91,8 @@ for (const [name, patch] of Object.entries({
   honeypot: { contactFax: "spam" },
   "unexpected recipient": { recipient: "other@example.com" },
   "object input": { name: { value: "Test" } },
+  "missing captcha token": { recaptchaToken: "" },
+  "oversized captcha token": { recaptchaToken: "x".repeat(4097) },
 })) {
   test(`rejects ${name} without calling SES`, async () => {
     const handler = createHandler(async () => {
@@ -172,6 +182,29 @@ test("provider rejection is recoverable and never success", async () => {
   const result = await handler(event());
   assert.equal(result.statusCode, 503);
   assert.equal(JSON.parse(result.body!).ok, false);
+});
+test("rejects failed or mismatched reCAPTCHA verification before SES", async () => {
+  for (const verification of [
+    { success: false, hostname: "jarvon.digital" },
+    { success: true, hostname: "evil.example" },
+  ]) {
+    const handler = createHandler(async () => {
+      throw new Error("Must not send");
+    }, { ...config, verifyCaptcha: async () => verification });
+    assert.equal((await handler(event())).statusCode, 403);
+  }
+});
+test("reCAPTCHA service errors fail closed before SES", async () => {
+  const handler = createHandler(async () => {
+    throw new Error("Must not send");
+  }, { ...config, verifyCaptcha: async () => { throw new Error("offline"); } });
+  assert.equal((await handler(event())).statusCode, 503);
+});
+test("missing reCAPTCHA secret fails closed before SES", async () => {
+  const handler = createHandler(async () => {
+    throw new Error("Must not send");
+  }, { ...config, recaptchaSecret: "" });
+  assert.equal((await handler(event())).statusCode, 503);
 });
 test("missing provider acceptance identifier is never success", async () => {
   const handler = createHandler(async () => ({}), config);

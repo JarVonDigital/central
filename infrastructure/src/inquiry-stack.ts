@@ -2,6 +2,7 @@ import {
   CfnOutput,
   Duration,
   RemovalPolicy,
+  SecretValue,
   Stack,
   StackProps,
   Tags,
@@ -94,6 +95,7 @@ export class InquiryStack extends Stack {
         SENDER_EMAIL: "website@jarvon.digital",
         RECIPIENT_EMAIL: "jarvondigital@gmail.com",
         ALLOWED_ORIGINS: origins.join(","),
+        RECAPTCHA_SECRET_KEY: SecretValue.secretsManager("jarvondigital/recaptcha-v2").unsafeUnwrap(),
       },
       bundling: { minify: true, sourceMap: false, bundleAwsSDK: true },
     });

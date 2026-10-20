@@ -155,6 +155,13 @@
       to your inquiry.
       <a routerLink="/privacy">How your information is handled</a>.
     </p>
+    <div class="captcha" aria-label="Spam protection">
+      <div #captchaContainer></div>
+      @if (captchaMessage()) {
+        <p class="captcha-message" role="status">{{ captchaMessage() }}</p>
+      }
+      <a class="captcha-fallback" href="mailto:jarvondigital@gmail.com">Trouble with verification? Email your inquiry ↗</a>
+    </div>
     <button class="button" type="submit" [disabled]="status() === 'submitting'">
       {{ status() === "submitting" ? "Sending…" : "Request my quote" }}
       <span aria-hidden="true">↗</span>

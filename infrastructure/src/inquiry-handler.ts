@@ -27,7 +27,20 @@ const limits: Record<string, number> = {
   offer: 50,
   budget: 50,
   contactFax: 200,
+  recaptchaToken: 4096,
 };
+type CaptchaResult = { success?: boolean; hostname?: string };
+async function verifyCaptcha(token: string, secret: string): Promise<CaptchaResult> {
+  const body = new URLSearchParams({ secret, response: token });
+  const result = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body,
+    signal: AbortSignal.timeout(4000),
+  });
+  if (!result.ok) throw new Error("captcha-provider");
+  return (await result.json()) as CaptchaResult;
+}
 const response = (
   statusCode: number,
   body: object,
@@ -45,7 +58,13 @@ export type Sender = (
 ) => Promise<{ MessageId?: string }>;
 export function createHandler(
   send: Sender,
-  config: { from: string; recipient: string; origins: string[] },
+  config: {
+    from: string;
+    recipient: string;
+    origins: string[];
+    recaptchaSecret: string;
+    verifyCaptcha?: typeof verifyCaptcha;
+  },
 ) {
   return async (
     event: APIGatewayProxyEventV2,
@@ -62,7 +81,7 @@ export function createHandler(
       return response(403, { ok: false, error: "origin" });
     if (!headers["content-type"]?.toLowerCase().startsWith("application/json"))
       return response(415, { ok: false, error: "content-type" });
-    if (!config.from || !config.recipient)
+    if (!config.from || !config.recipient || !config.recaptchaSecret)
       return response(503, { ok: false, error: "unavailable" });
     let payload: unknown;
     try {
@@ -97,9 +116,11 @@ export function createHandler(
       budget,
       website,
       contactFax,
+      recaptchaToken,
     } = fields;
     if (
       contactFax ||
+      !recaptchaToken ||
       !name ||
       !business ||
       !description ||
@@ -127,6 +148,17 @@ export function createHandler(
       } catch {
         return response(422, { ok: false, error: "website" });
       }
+    }
+    try {
+      const verified = await (config.verifyCaptcha ?? verifyCaptcha)(
+        recaptchaToken,
+        config.recaptchaSecret,
+      );
+      const expectedHostname = new URL(headers["origin"]!).hostname;
+      if (verified.success !== true || verified.hostname !== expectedHostname)
+        return response(403, { ok: false, error: "captcha" });
+    } catch {
+      return response(503, { ok: false, error: "captcha-unavailable" });
     }
     try {
       const sent = await send({
@@ -196,5 +228,6 @@ export const handler = createHandler(
     from: process.env.SENDER_EMAIL ?? "",
     recipient: process.env.RECIPIENT_EMAIL ?? "",
     origins: (process.env.ALLOWED_ORIGINS ?? "").split(",").filter(Boolean),
+    recaptchaSecret: process.env.RECAPTCHA_SECRET_KEY ?? "",
   },
 );

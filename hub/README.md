@@ -13,9 +13,9 @@ Offer definitions live in `src/app/offers.ts`; the shared pricing component rend
 
 ## Inquiry configuration
 
-The application reads `/site-config.json` when a valid inquiry is submitted. `npm run build` first runs `scripts/configure-site.mjs`, which takes `INQUIRY_ENDPOINT` from the environment or the config file. The endpoint must match `https://API_ID.execute-api.us-east-1.amazonaws.com/inquiries`. Set `REQUIRE_INQUIRY_CONFIG=true` for launch builds. Empty config supports local preview but cannot report a successful inquiry. The endpoint is public; no private provider keys belong in the browser.
+The application reads `/site-config.json` for the public reCAPTCHA v2 checkbox site key and inquiry endpoint. `npm run build` first runs `scripts/configure-site.mjs`, which takes `INQUIRY_ENDPOINT` and `RECAPTCHA_SITE_KEY` from the environment or the config file. The endpoint must match `https://API_ID.execute-api.us-east-1.amazonaws.com/inquiries`. Set `REQUIRE_INQUIRY_CONFIG=true` for launch builds; both values are required. Empty reCAPTCHA configuration supports local preview but blocks form submission. Only the public site key belongs in the browser; the secret key is held by the Lambda deployment.
 
-The form validates on blur/submit, prevents duplicate in-flight submits, preserves fields on errors, times out after 20 seconds, and reports success only after the AWS endpoint confirms SES acceptance. The site never stores inquiry details in browser storage. Verify actual inbox receipt before launch.
+The form validates on blur/submit, requires a completed reCAPTCHA check, prevents duplicate in-flight submits, preserves fields on errors, times out after 20 seconds, and reports success only after the AWS endpoint confirms SES acceptance. The site never stores inquiry details in browser storage. Verify actual inbox receipt before launch.
 
 ## Assets and operations
 

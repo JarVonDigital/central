@@ -13,8 +13,27 @@ for (const [name, engine] of Object.entries({ chromium, webkit })) {
   const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  await page.route("**/site-config.json", (r) =>
+    r.fulfill({ json: { inquiryEndpoint: "", recaptchaSiteKey: "test-site-key-123" } }),
+  );
+  await page.route("https://www.google.com/recaptcha/api.js?**", (r) =>
+    r.fulfill({
+      contentType: "text/javascript",
+      body: `window.grecaptcha = {
+        render(container, options) {
+          window.__captchaRenders = (window.__captchaRenders || 0) + 1;
+          window.__solveCaptcha = () => options.callback('test-captcha-token');
+          container.textContent = 'Test verification';
+          return 0;
+        },
+        reset() {}
+      };
+      window[new URL(document.currentScript.src).searchParams.get('onload')]();`,
+    }),
+  );
   await page.goto(base);
   await page.locator("h1").waitFor();
+  await page.waitForFunction(() => typeof window.__solveCaptcha === "function");
   for (const width of [360, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     assert(
@@ -150,10 +169,14 @@ for (const [name, engine] of Object.entries({ chromium, webkit })) {
   await page
     .locator("#description")
     .fill("A clearly labeled automated test inquiry.");
+  await page.getByRole("button", { name: "Request my quote" }).click();
+  await page.getByText("Please complete the reCAPTCHA check.").waitFor();
+  checks++;
   // Missing endpoint must be recoverable and must never claim acceptance.
   await page.route("**/site-config.json", (r) =>
-    r.fulfill({ json: { inquiryEndpoint: "" } }),
+    r.fulfill({ json: { inquiryEndpoint: "", recaptchaSiteKey: "test-site-key-123" } }),
   );
+  await page.evaluate(() => window.__solveCaptcha());
   await page.getByRole("button", { name: "Request my quote" }).click();
   await page
     .getByText("Your inquiry could not be confirmed.", { exact: false })
@@ -167,6 +190,7 @@ for (const [name, engine] of Object.entries({ chromium, webkit })) {
       json: {
         inquiryEndpoint:
           "https://test123.execute-api.us-east-1.amazonaws.com/inquiries",
+        recaptchaSiteKey: "test-site-key-123",
       },
     }),
   );
@@ -178,6 +202,7 @@ for (const [name, engine] of Object.entries({ chromium, webkit })) {
     async (r) => {
       requests++;
       assert.equal(r.request().postDataJSON().offer, "website-care");
+      assert.equal(r.request().postDataJSON().recaptchaToken, "test-captcha-token");
       if (mode === "pending")
         await new Promise((resolve) => {
           release = resolve;
@@ -194,15 +219,20 @@ for (const [name, engine] of Object.entries({ chromium, webkit })) {
   const failedResponse = page.waitForResponse(
     "https://test123.execute-api.us-east-1.amazonaws.com/inquiries",
   );
+  await page.evaluate(() => window.__solveCaptcha());
   await page.getByRole("button", { name: "Request my quote" }).click();
   await failedResponse;
   await page.waitForFunction(
     () => document.querySelector("form").getAttribute("aria-busy") === "false",
   );
   assert.equal(requests, 1);
+  await page.getByRole("button", { name: "Request my quote" }).click();
+  await page.getByText("Please complete the reCAPTCHA check.").waitFor();
+  assert.equal(requests, 1);
   checks++;
   // Duplicate submission protection: hold the response and trigger another DOM submit.
   mode = "pending";
+  await page.evaluate(() => window.__solveCaptcha());
   await page.getByRole("button", { name: "Request my quote" }).click();
   await page.waitForFunction(
     () => document.querySelector("form").getAttribute("aria-busy") === "true",
@@ -224,6 +254,7 @@ for (const [name, engine] of Object.entries({ chromium, webkit })) {
   checks += 4;
   await packageLinks.nth(0).click();
   await page.locator("#name").waitFor();
+  await page.waitForFunction(() => window.__captchaRenders === 2);
   assert.equal(await page.locator("#name").inputValue(), "");
   await page.waitForFunction(
     () => document.querySelector("#offer").value === "business-website",
